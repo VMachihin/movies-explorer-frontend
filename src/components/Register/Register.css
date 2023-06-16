@@ -1,0 +1,22 @@
+.sign__text {
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+}
+
+.sign__linkSignIn {
+  text-decoration: none;
+  color: #3456F3;
+}
+
+.sign__linkSignIn:visited {
+  color: #3456F3;
+}
+
+.input__text-error_api {
+  margin-top: 10px;
+  visibility: hidden;
+}
