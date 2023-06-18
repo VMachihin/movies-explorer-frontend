@@ -8,7 +8,7 @@ function Profile() {
       <div className="container">
         <h3 className="profile__title">Привет, Виталий!</h3>
         <form className="profile__form" noValidate>
-          <div className="input__wrapper">
+          <div className="profile__input-wrapper">
             <label htmlFor="name" className="profile__label">Имя</label>
             <input
               className="profile__input"
@@ -24,7 +24,7 @@ function Profile() {
 
           <div className="line line_form"></div>
 
-          <div className="input__wrapper">
+          <div className="profile__input-wrapper">
             <label htmlFor="email" className="profile__label">E-mail</label>
             <input
               className="profile__input"

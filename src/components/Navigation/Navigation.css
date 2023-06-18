@@ -1,11 +1,11 @@
-.nav__auth {
+.nav-auth {
   display: flex;
   align-items: center;
   align-self: center;
   justify-content: flex-end;
 }
 
-.nav__register-link {
+.nav-auth__register-link {
   text-decoration: none;
   font-style: normal;
   font-weight: 500;
@@ -15,11 +15,11 @@
   transition: color 0.3s ease-in-out;
 }
 
-.nav__register-link:hover {
+.nav-auth__register-link:hover {
   color: #2BE080;
 }
 
-.nav__login-link {
+.nav-auth__login-link {
   text-decoration: none;
   font-style: normal;
   font-weight: 500;
@@ -38,18 +38,18 @@
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in;
 }
 
-.nav__login-link:hover {
+.nav-auth__login-link:hover {
   transform: translateY(-3px);
   box-shadow: 0px 5px 10px 2px #2BE080;
 }
 
-.nav__wrapper_burger {
+.nav-movies__wrapper_burger {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.nav__link-main {
+.link-main {
   display: block;
   font-weight: 400;
   font-size: 13px;
@@ -60,13 +60,13 @@
   margin: 0 0 28px 0;
 }
 
-.nav__movies {
+.nav-movies {
   display: contents;
   align-items: center;
   background-color: #FFFFFF;
 }
 
-.nav__link-movies {
+.nav-movies__link {
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
@@ -76,27 +76,31 @@
   transition: color 0.3s ease;
 }
 
-.nav__link-movies:last-child {
+.nav-movies__link:last-child {
   margin-right: 0;
 }
 
-.nav__link-movies:hover {
+.nav-movies__link:hover {
   color: #2BE080;
 }
 
-.nav__link-movies_active {
+.nav-movies__link_active {
   font-weight: 500;
 }
 
-.nav__link-movies_burger-active {
+.nav-movies__link_main {
+  color: #FFFFFF;
+}
+
+.nav-movies__link_burger-active {
   border-bottom: 2px solid #000000;
 }
 
-.nav__link-movies_burger {
+.nav-movies__link_burger {
   margin: 0 0 28px 0;
 }
 
-.nav__link-movies_burger:last-child {
+.nav-movies__link_burger:last-child {
   margin-bottom: 0;
 }
 
@@ -116,7 +120,11 @@
   line-height: 16px;
 }
 
-.navigation__profile {
+.profile-link__text_main {
+  color: #FFFFFF;
+}
+
+.profile-link__route {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -132,32 +140,32 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.navigation__profile:hover {
+.profile-link__route:hover {
   box-shadow: 0px 5px 10px 2px #2BE080;
   transform: translateY(-2px);
 }
 
 
-.navigation__profile:visited {
+.profile-link__route:visited {
   color: #000000;
 }
 
 @media(max-width: 560px) {
 
-  .nav__link-main,
-  .nav__link-movies_burger {
+  .nav-movies__link_main,
+  .nav-movies__link_burger {
     margin-bottom: 24px;
   }
 }
 
 @media(max-width: 510px) {
 
-  .nav__register-link,
-  .nav__login-link {
+  .nav-auth__register-link,
+  .nav-auth__login-link {
     font-size: 10px;
   }
 
-  .nav__login-link {
+  .nav-auth__login-link {
     margin-left: 14px;
   }
 }

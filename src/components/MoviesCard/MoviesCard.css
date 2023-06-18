@@ -95,7 +95,8 @@
     margin: 0 0 0 12px;
   }
 
-  .movie__like-btn {
+  .movie__like-btn,
+  .movie__delete-btn {
     position: absolute;
     top: 16px;
     right: 16px;

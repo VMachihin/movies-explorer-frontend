@@ -7,14 +7,14 @@ import Portfolio from "../Main/Portfolio/Portfolio.jsx";
 
 function Main() {
   return (
-    <div className="page">
+    <>
       <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-    </div>
+    </>
   )
 }
 

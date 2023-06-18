@@ -33,11 +33,11 @@
   justify-content: space-between;
 }
 
-.link__item {
+.footer__item {
   margin-right: 20px;
 }
 
-.link__item:last-child {
+.footer__item:last-child {
   margin-right: 0;
 }
 
@@ -89,7 +89,7 @@
     flex-direction: column;
   }
 
-  .link__item {
+  .footer__item {
     margin: 0 0 12px 0;
   }
 }

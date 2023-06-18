@@ -4,7 +4,7 @@ import './BurgerMenu.css';
 
 import Navigation from '../Navigation/Navigation';
 
-function BurgerMenu({ loggedIn }) {
+function BurgerMenu({ loggedIn, mainPage }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   function toggleBurger() {
@@ -30,9 +30,9 @@ function BurgerMenu({ loggedIn }) {
     <div className="burger">
 
       <div className="burger__btn" onClick={toggleBurger}>
-        <span className='burger__line'></span>
-        <span className='burger__line'></span>
-        <span className='burger__line'></span>
+        <span className={`burger__line ${mainPage ? 'burger__line_mainPage' : ''}`}></span>
+        <span className={`burger__line ${mainPage ? 'burger__line_mainPage' : ''}`}></span>
+        <span className={`burger__line ${mainPage ? 'burger__line_mainPage' : ''}`}></span>
       </div>
 
       {isOpen && <div className="burger__overlay" onClick={toggleBurger}></div>}

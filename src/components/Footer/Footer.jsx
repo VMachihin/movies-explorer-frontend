@@ -10,10 +10,10 @@ function Footer() {
           <span className='year'>&#169;{new Date().getFullYear()}</span>
 
           <ul className='footer__list'>
-            <li className='link__item'>
+            <li className='footer__item'>
               <a href="https://practicum.yandex.ru/" className="footer__link" target='blank'>Яндекс.Практикум</a>
             </li>
-            <li className='link__item'>
+            <li className='footer__item'>
               <a href="https://github.com/VMachihin/VMachihin" className="footer__link" target='blank'>Github</a>
             </li>
           </ul>

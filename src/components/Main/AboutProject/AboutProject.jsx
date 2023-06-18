@@ -4,7 +4,7 @@ function AboutProject() {
   return (
     <section className="aboutProject">
       <div className="container">
-        <h2 className="section__title">О&nbsp;проекте</h2>
+        <h2 className="section-title">О&nbsp;проекте</h2>
         <div className='line'></div>
 
         <ul className='aboutProject__list'>
@@ -18,18 +18,18 @@ function AboutProject() {
           </li>
         </ul>
 
-        <div className='aboutProject__stat'>
-          <div className='back__info'>
-            <div className='back'>
-              <span className='text'>1 неделя</span>
+        <div className='project-stat'>
+          <div className='project-stat__info'>
+            <div className='project-stat__back'>
+              <span className='project-stat__text'>1 неделя</span>
             </div>
-            <span className='text'>Back-end</span>
+            <span className='project-stat__text'>Back-end</span>
           </div>
-          <div className='front__info'>
-            <div className='front'>
-              <span className='text'>4 недели</span>
+          <div className='project-stat__info project-stat__info_front'>
+            <div className='project-stat__front'>
+              <span className='project-stat__text'>4 недели</span>
             </div>
-            <span className='text'>Front-end</span>
+            <span className='project-stat__text'>Front-end</span>
           </div>
         </div>
       </div>

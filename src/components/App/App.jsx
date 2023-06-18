@@ -28,24 +28,26 @@ function App() {
     || location.pathname === '/movies'
     || location.pathname === '/saved-movies'
 
-  const [loggedIn, setloggedIn] = React.useState(true);
+  const [loggedIn, setloggedIn] = React.useState(false);
 
   return (
     <>
 
       {showHeader ? <Header loggedIn={loggedIn} /> : null}
 
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
+          <Route path='/profile' element={<Profile />} />
 
-        <Route path='/sign-up' element={<Register />} />
-        <Route path='/sign-in' element={<Login />} />
+          <Route path='/sign-up' element={<Register />} />
+          <Route path='/sign-in' element={<Login />} />
 
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </main>
 
       {showFooter ? <Footer /> : null}
     </>
