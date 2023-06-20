@@ -1,0 +1,20 @@
+.header {
+  height: 74px;
+  padding: 18px 0;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+}
+
+.header_mainPage {
+  background-color: #073042;
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-logo {
+  width: 38px;
+}

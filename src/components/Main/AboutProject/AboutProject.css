@@ -1,0 +1,143 @@
+.aboutProject {
+  padding: 110px 0;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  margin: 23px 0 94px 0;
+}
+
+.aboutProject__list {
+  list-style-type: none;
+  display: flex;
+  margin: 0 0 110px 0;
+  padding: 0;
+}
+
+.aboutProject__item {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  margin-right: 40px;
+}
+
+.aboutProject__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0 0 26px 0;
+}
+
+.aboutProject__subTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  opacity: 1;
+  max-width: 550px;
+}
+
+.project-stat {
+  display: flex;
+}
+
+.project-stat__info {
+  text-align: center;
+  flex: 0.21;
+}
+
+.project-stat__info_front {
+  text-align: center;
+  flex: 0.79;
+}
+
+.project-stat__back {
+  height: 36px;
+  background-color: #2BE080;
+  text-align: center;
+  padding: 9px 0;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+}
+
+.project-stat__front {
+  height: 36px;
+  background-color: #F2F2F2;
+  text-align: center;
+  padding: 9px 0;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+}
+
+@media(max-width: 768px) {
+  .aboutProject {
+    padding: 90px 0;
+  }
+
+  .title-section,
+  .aboutProject__title,
+  .aboutProject__subTitle {
+    text-align: start;
+  }
+
+  .line {
+    margin-bottom: 70px;
+  }
+
+  .aboutProject__item {
+    margin-right: 30px;
+  }
+}
+
+@media(max-width: 672px) {
+  .aboutProject__title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .aboutProject__subTitle {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .aboutProject__list {
+    margin-bottom: 70px;
+  }
+
+  .project-stat__text {
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 410px) {
+  .aboutProject__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .aboutProject__subTitle {
+    font-size: 10px;
+    line-height: 13px;
+  }
+
+  .project-stat__text {
+    font-size: 12px;
+  }
+}
