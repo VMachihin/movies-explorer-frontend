@@ -26,13 +26,15 @@ function Login() {
     <section className="sign">
       <div className="container">
         <Link to="/" className="main-logo">
-          <img src={logo} alt='главный логотип' />
+          <img src={logo} alt="главный логотип" />
         </Link>
 
-        <form className="sign__form" onSubmit={handleSubmit} noValidate >
+        <form className="sign__form" onSubmit={handleSubmit} noValidate>
           <h2 className="sign__title">Рады видеть!</h2>
           <div className="sign__input-wrapper">
-            <label htmlFor="email" className='sign__label'>E-mail</label>
+            <label htmlFor="email" className="sign__label">
+              E-mail
+            </label>
             <input
               type="email"
               name="email"
@@ -44,13 +46,13 @@ function Login() {
               value={values.email || ''}
               onChange={handleChange}
             />
-            <span className="input__text-error">
-              {errors.email}
-            </span>
+            <span className="input__text-error">{errors.email}</span>
           </div>
 
           <div className="sign__input-wrapper">
-            <label htmlFor="email" className='sign__label'>Пароль</label>
+            <label htmlFor="email" className="sign__label">
+              Пароль
+            </label>
             <input
               type="password"
               name="password"
@@ -62,18 +64,16 @@ function Login() {
               value={values.password || ''}
               onChange={handleChange}
             />
-            <span className={`input__text-error ${!isValid && `input__text-error_active`}`}>
-              {errors.password}
-            </span>
+            <span className={`input__text-error ${!isValid && `input__text-error_active`}`}>{errors.password}</span>
           </div>
 
-          <button type="submit" className={`sign__btn ${!isValid ? `sign__btn_disabled` : null}`} disabled={!isValid} >
+          <button type="submit" className={`sign__btn ${!isValid ? `sign__btn_disabled` : null}`} disabled={!isValid}>
             Войти
           </button>
         </form>
-      </div >
-    </section >
-  )
+      </div>
+    </section>
+  );
 }
 
 export default Login;

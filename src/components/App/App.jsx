@@ -12,44 +12,48 @@ import Login from '../Login/Login.jsx';
 
 import Preloader from '../Preloader/Preloader.jsx';
 
-import NotFound from "../NotFound/NotFound.jsx";
+import NotFound from '../NotFound/NotFound.jsx';
 import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
 
+import ProtectedRouteElement from '../../utils/ProtectedRoute.jsx';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
+
   const location = useLocation();
   const showHeader =
-    location.pathname === '/'
-    || location.pathname === '/movies'
-    || location.pathname === '/saved-movies'
-    || location.pathname === '/profile';
+    location.pathname === '/' ||
+    location.pathname === '/movies' ||
+    location.pathname === '/saved-movies' ||
+    location.pathname === '/profile';
 
-  const showFooter = location.pathname === '/'
-    || location.pathname === '/movies'
-    || location.pathname === '/saved-movies'
+  const showFooter = location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies';
 
   const [loggedIn, setloggedIn] = React.useState(false);
 
   return (
     <>
+      <CurrentUserContext.Provider value={currentUser}>
+        {showHeader ? <Header loggedIn={loggedIn} /> : null}
 
-      {showHeader ? <Header loggedIn={loggedIn} /> : null}
+        <main>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/movies" element={<ProtectedRouteElement element={<Movies />} />} />
+            <Route path="/saved-movies" element={<ProtectedRouteElement element={<SavedMovies />} />} />
+            <Route path="/profile" element={<ProtectedRouteElement element={<Profile />} />} />
 
-      <main>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile />} />
+            <Route path="/sign-up" element={<Register />} />
+            <Route path="/sign-in" element={<Login />} />
 
-          <Route path='/sign-up' element={<Register />} />
-          <Route path='/sign-in' element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
 
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </main>
-
-      {showFooter ? <Footer /> : null}
+        {showFooter ? <Footer /> : null}
+      </CurrentUserContext.Provider>
     </>
   );
 }

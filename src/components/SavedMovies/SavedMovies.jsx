@@ -1,5 +1,5 @@
-import SearchForm from "../SearchForm/SearchForm.jsx";
-import MoviesCardList from "../MoviesCardList/MoviesCardList.jsx";
+import SearchForm from '../SearchForm/SearchForm.jsx';
+import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 
 function SavedMovies() {
   return (
@@ -7,7 +7,7 @@ function SavedMovies() {
       <SearchForm />
       <MoviesCardList />
     </>
-  )
+  );
 }
 
-export default SavedMovies
+export default SavedMovies;

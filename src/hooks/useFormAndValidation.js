@@ -1,5 +1,5 @@
-import React from "react";
-import { useCallback } from "react";
+import React from 'react';
+import { useCallback } from 'react';
 
 // кастомный хук для контроля любого количества инпутов в любых формах и валидации от Barsegyan brothers
 function useFormAndValidation(inputValues) {
@@ -20,7 +20,7 @@ function useFormAndValidation(inputValues) {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid],
+    [setValues, setErrors, setIsValid]
   );
 
   return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid };

@@ -46,7 +46,7 @@
 }
 
 .line_form {
-  background: #E8E8E8;
+  background: #e8e8e8;
   margin: 16px 0;
 }
 
@@ -54,7 +54,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: none;
   cursor: pointer;
   margin: 220px 0 0 0;
@@ -62,7 +62,7 @@
 }
 
 .profile__edit:hover {
-  color: #2BE080;
+  color: #2be080;
 }
 
 .profile__exit {
@@ -70,16 +70,16 @@
   font-size: 13px;
   line-height: 16px;
   text-decoration: none;
-  color: #FF3055;
+  color: #ff3055;
   margin: 16px 0 0 0;
   transition: text-shadow 0.3s ease;
 }
 
 .profile__exit:hover {
-  text-shadow: #FF3055 1px 0 10px;
+  text-shadow: #ff3055 1px 0 10px;
 }
 
-@media(max-width:500px) {
+@media (max-width: 500px) {
   .profile__form {
     width: 100%;
   }
