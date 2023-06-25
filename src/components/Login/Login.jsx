@@ -6,7 +6,7 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import './Login.css';
 import logo from '../../images/logo/main_logo.svg';
 
-function Login() {
+function Login({ onAuthoriz }) {
   const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation({});
 
   React.useEffect(() => {
@@ -20,6 +20,7 @@ function Login() {
       return;
     }
     setValues({ email: '', password: '' });
+    onAuthoriz(values.email, values.password);
   }
 
   return (

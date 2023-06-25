@@ -1,11 +1,11 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 
-function Movies() {
+function Movies({ moviesData }) {
   return (
     <>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList movies={moviesData} />
     </>
   );
 }

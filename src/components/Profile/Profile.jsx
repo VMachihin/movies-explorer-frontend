@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 import './Profile.css';
 
-function Profile() {
+function Profile({ userData, onSignOut }) {
   return (
     <section className="profile">
       <div className="container">
-        <h3 className="profile__title">Привет, Виталий!</h3>
+        <h3 className="profile__title">{`Привет, ${userData.name}!`}</h3>
         <form className="profile__form" noValidate>
           <div className="profile__input-wrapper">
             <label htmlFor="name" className="profile__label">
@@ -20,7 +20,7 @@ function Profile() {
               required
               minLength="2"
               maxLength="40"
-              // value="value"
+              defaultValue={userData.name || ''}
             />
           </div>
 
@@ -38,13 +38,15 @@ function Profile() {
               required
               minLength="2"
               maxLength="40"
-              // value="value"
+              defaultValue={userData.email || ''}
             />
           </div>
 
           <button className="profile__edit">Редактировать</button>
 
-          <Link className="profile__exit">Выйти из аккаунта</Link>
+          <Link className="profile__exit" onClick={onSignOut}>
+            Выйти из аккаунта
+          </Link>
         </form>
       </div>
     </section>

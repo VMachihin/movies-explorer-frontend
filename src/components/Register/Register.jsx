@@ -5,7 +5,7 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import './Register.css';
 import logo from '../../images/logo/main_logo.svg';
 
-function Register() {
+function Register({ onRegister }) {
   const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation({});
 
   React.useEffect(() => {
@@ -15,6 +15,10 @@ function Register() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (values.password) {
+      const { name, email, password } = values;
+      onRegister(name, email, password);
+    }
     setValues({ name: '', email: '', password: '' });
   }
 
@@ -91,7 +95,7 @@ function Register() {
 
         <span className="sign__text">
           Уже зарегистрированы?&nbsp;
-          <Link to="/sign-in" className="sign__linkSignIn">
+          <Link to="/signin" className="sign__linkSignIn">
             Войти
           </Link>
         </span>

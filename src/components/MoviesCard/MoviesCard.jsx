@@ -18,12 +18,12 @@ function MoviesCard({ movie }) {
       <article className="movie">
         <div className="movie__info">
           <h3 className="movie__title">{movie.nameRU}</h3>
-          <span className="movie__duration">1ч 42м</span>
+          <span className="movie__duration">{movie.duration}</span>
 
           {checkPath(location.pathname)}
         </div>
 
-        <img src={movie.image} alt="постер к фильму" className="movie__img" />
+        <img src={`https://api.nomoreparties.co/${movie.image.url}`} alt="постер к фильму" className="movie__img" />
       </article>
     </li>
   );
