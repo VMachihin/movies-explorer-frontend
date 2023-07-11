@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -10,14 +10,13 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 
-import Preloader from '../Preloader/Preloader';
-
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-import { register, authorization, checkToken, getUserInfo, editingProfile } from '../../utils/MainApi';
-import { getAllMovies } from '../../utils/MoviesApi';
+import { register, authorization, checkToken } from '../../utils/Auth';
+import { getUserInfo, editingProfile } from '../../utils/MainApi';
+import { getAllMovies, getSavedMovies, saveMovie, deleteMovie } from '../../utils/MoviesApi';
 
 import ProtectedRouteElement from '../../utils/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -36,24 +35,26 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setloggedIn] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isResOk, setIsResOk] = React.useState(false);
 
+  // Регистрация
   function handleRegister(name, email, password) {
     register(name, email, password)
       .then((res) => {
-        navigate('/signin', { replace: true });
+        navigate('/movies', { replace: true });
       })
       .catch(console.error);
   }
 
+  // Авторизация
   function handleAutorization(email, password) {
     authorization(email, password)
       .then((data) => {
-        console.log(data.token);
         if (data.token) {
           localStorage.setItem('jwt', data.token);
-          console.log(localStorage.getItem('token'));
           setloggedIn(true);
-          navigate('/', { replace: true });
+          navigate('/movies', { replace: true });
         }
       })
       .catch(console.error);
@@ -66,8 +67,8 @@ function App() {
         .then((res) => {
           if (res) {
             setloggedIn(true);
-            navigate('/', { replace: true });
-            // setUserEmail(res.email);
+
+            navigate(location.pathname);
           }
         })
         .catch(console.error);
@@ -76,33 +77,109 @@ function App() {
 
   React.useEffect(() => {
     loggedIn &&
-      Promise.all([getUserInfo(), getAllMovies()])
-        .then(([userData, moviesData]) => {
+      Promise.all([getUserInfo(), getAllMovies(), getSavedMovies()])
+        .then(([userData, moviesData, savedMoviesData]) => {
           setCurrentUser(userData);
           setMovies(moviesData);
+          setSavedMovies(savedMoviesData);
+          localStorage.setItem('savedMovies', JSON.stringify(savedMoviesData));
         })
         .catch(console.error);
   }, [loggedIn]);
 
+  useEffect(() => {
+    loggedIn && localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies, loggedIn]);
+
+  function handleEditUserInfo(newUserData) {
+    editingProfile(newUserData)
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsResOk(true);
+      })
+      .catch((err) => {
+        setIsResOk(false);
+        console.err(err);
+      });
+  }
+
+  function handleSaveMovies(movie, isSave, savedMovie) {
+    console.log(movie, isSave, savedMovie);
+    if (isSave) {
+      handleDeleteMovie(savedMovie._id);
+    } else {
+      saveMovie(movie)
+        .then((res) => {
+          setSavedMovies([res, ...savedMovies]);
+        })
+        .catch(console.error);
+    }
+  }
+
+  function handleDeleteMovie(savedMovie) {
+    console.log(savedMovie);
+    // const foundSaveMovies = JSON.parse(localStorage.getItem('foundSaveMovies'));
+    // let newSavedMovies;
+    // deleteMovie(movieId)
+    //   .then((res) => {
+    //     newSavedMovies = savedMovies.filter((movie) => movie._id !== movieId);
+    //     setSavedMovies(newSavedMovies);
+    //   })
+    //   .catch(console.error);
+    // .finally(() => {
+    //   localStorage.setItem('searchedSavedMovies', JSON.stringify(newSavedMovies));
+    // });
+  }
+
   function handleSignOut() {
     setloggedIn(false);
-    localStorage.removeItem('jwt');
-    // setUserEmail('');
+    // localStorage.removeItem('jwt');
+    localStorage.clear();
   }
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={{ currentUser }}>
         {showHeader ? <Header loggedIn={loggedIn} /> : null}
 
         <main>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/movies" element={<ProtectedRouteElement loggedIn={loggedIn} element={Movies} moviesData={movies} />} />
-            <Route path="/saved-movies" element={<ProtectedRouteElement loggedIn={loggedIn} element={SavedMovies} />} />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRouteElement
+                  loggedIn={loggedIn}
+                  element={Movies}
+                  movies={movies}
+                  savedMovies={savedMovies}
+                  onSaveMovie={handleSaveMovies}
+                  onDeleteMovie={handleDeleteMovie}
+                />
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRouteElement
+                  loggedIn={loggedIn}
+                  element={SavedMovies}
+                  savedMovies={savedMovies}
+                  onDeleteMovie={handleDeleteMovie}
+                />
+              }
+            />
             <Route
               path="/profile"
-              element={<ProtectedRouteElement loggedIn={loggedIn} element={Profile} userData={currentUser} onSignOut={handleSignOut} />}
+              element={
+                <ProtectedRouteElement
+                  loggedIn={loggedIn}
+                  element={Profile}
+                  onSignOut={handleSignOut}
+                  onEditUserInfo={handleEditUserInfo}
+                  isResOk={isResOk}
+                />
+              }
             />
 
             <Route path="/signup" element={<Register onRegister={handleRegister} />} />

@@ -1,11 +1,43 @@
 import { request } from './MainApi';
 
-export const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import { MOVIES_URL, SAVED_MOVIES_URL } from './constants';
+
 export const headers = {
   'Content-Type': 'application/json',
   authorization: `Bearer ${localStorage.getItem('jwt')}`,
 };
 
 export function getAllMovies() {
-  return request(`${BASE_URL}`, { headers: headers });
+  return request(`${MOVIES_URL}beatfilm-movies`, { headers: headers });
+}
+
+export function getSavedMovies() {
+  return request(`${SAVED_MOVIES_URL}`, { headers: headers });
+}
+
+export function saveMovie(movie) {
+  return request(`${SAVED_MOVIES_URL}`, {
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `${MOVIES_URL}${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `${MOVIES_URL}${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }),
+  });
+}
+
+export function deleteMovie(id) {
+  return request(`${SAVED_MOVIES_URL}/${id}`, {
+    method: 'DELETE',
+    headers: headers,
+  });
 }

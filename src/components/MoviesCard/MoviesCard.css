@@ -63,6 +63,11 @@
 .movie__img {
   width: 220px;
   height: 122px;
+  transition: scale 0.3s ease;
+}
+
+.movie__img:hover {
+  scale: 1.1;
 }
 
 @media (max-width: 672px) {

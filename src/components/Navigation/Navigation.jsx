@@ -19,11 +19,11 @@ function Navigation({ loggedIn, toggleBurger, mainPage }) {
     <>
       {!loggedIn ? (
         <div className="nav-auth">
-          <Link to="/sign-up" className="nav-auth__register-link">
+          <Link to="/signup" className="nav-auth__register-link">
             Регистрация
           </Link>
 
-          <Link to="/sign-in" className="nav-auth__login-link">
+          <Link to="/signin" className="nav-auth__login-link">
             Войти
           </Link>
         </div>

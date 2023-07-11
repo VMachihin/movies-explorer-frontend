@@ -1,4 +1,8 @@
+import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard.jsx';
+
+import { useLocation } from 'react-router-dom';
+import useResize from '../../hooks/useResize';
 
 import './MoviesCardList.css';
 // const movies = [
@@ -48,16 +52,45 @@ import './MoviesCardList.css';
 //   },
 // ];
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, savedMovies, onSaveMovie, onDeleteMovie }) {
+  const location = useLocation();
+  let size = useResize();
+  const [countShowMovies, setCountShowMovies] = React.useState(0);
+
+  React.useEffect(() => {
+    setCountShowMovies(0);
+  }, [movies]);
+
+  const showMovies = React.useMemo(() => {
+    const sizeCount = size.width < 768 ? 5 : size.width < 1280 ? 8 : 12;
+
+    return movies.slice(0, sizeCount + countShowMovies);
+  }, [movies, countShowMovies, size]);
+
   return (
     <section className="movie-library">
       <div className="container">
         <ul className="movie-library__list">
-          {movies.map((movie) => {
-            return <MoviesCard key={movie.id} movie={movie} />;
-          })}
+          {showMovies.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              key={movie.id || movie.movieId}
+              savedMovies={savedMovies}
+              onSaveMovie={onSaveMovie}
+              onDeleteMovie={onDeleteMovie}
+            />
+          ))}
         </ul>
-        <button className="movie-library__btn">Ещё</button>
+        {location.pathname === '/movies' && movies.length > showMovies.length && (
+          <button
+            className="movie-library__btn"
+            onClick={() => {
+              setCountShowMovies((item) => item + (size.width >= 1280 ? 3 : 2));
+            }}
+          >
+            Ещё
+          </button>
+        )}
       </div>
     </section>
   );

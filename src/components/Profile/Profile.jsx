@@ -1,13 +1,34 @@
+import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import './Profile.css';
 
-function Profile({ userData, onSignOut }) {
+function Profile({ onUpdateUser, onSignOut, isResOk, onEditProfileActive, editingActive }) {
+  const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation({});
+  const { currentUser } = useContext(CurrentUserContext);
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setValues(currentUser);
+      setIsValid(true);
+    }
+  }, [currentUser, setIsValid, setValues]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onUpdateUser(values);
+  }
+
   return (
     <section className="profile">
       <div className="container">
-        <h3 className="profile__title">{`Привет, ${userData.name}!`}</h3>
-        <form className="profile__form" noValidate>
+        <h3 className="profile__title">{`Привет, ${currentUser.name}!`}</h3>
+        <form className="profile__form" noValidate onSubmit={handleSubmit}>
           <div className="profile__input-wrapper">
             <label htmlFor="name" className="profile__label">
               Имя
@@ -17,11 +38,16 @@ function Profile({ userData, onSignOut }) {
               name="name"
               id="name"
               type="text"
+              placeholder="Введите имя"
               required
               minLength="2"
               maxLength="40"
-              defaultValue={userData.name || ''}
+              value={values.name || ''}
+              onChange={handleChange}
+              disabled={!editingActive}
             />
+
+            <span className={`profile__input-textError ${!isValid && `profile__input-textError_active`}`}>{errors.name}</span>
           </div>
 
           <div className="line line_form"></div>
@@ -33,20 +59,40 @@ function Profile({ userData, onSignOut }) {
             <input
               className="profile__input"
               type="email"
+              placeholder="Введите почту"
               name="email"
               id="email"
               required
               minLength="2"
               maxLength="40"
-              defaultValue={userData.email || ''}
+              value={values.email || ''}
+              onChange={handleChange}
+              disabled={!editingActive}
             />
+
+            <span className={`profile__input-textError ${!isValid && `profile__input-textError_active`}`}>{errors.email}</span>
           </div>
 
-          <button className="profile__edit">Редактировать</button>
+          <span className={`profile__text-statusReq ${isResOk && `profile__text-statusReq_active`}`}>Данные профиля успешно обновлены</span>
 
-          <Link className="profile__exit" onClick={onSignOut}>
-            Выйти из аккаунта
-          </Link>
+          {editingActive ? (
+            <button
+              className={`profile__edit-save ${editingActive && `profile__edit-save_show`} ${!isValid && `profile__edit-save_disabled`}`}
+              disabled={!isValid}
+            >
+              Сохранить
+            </button>
+          ) : (
+            <>
+              <button type="button" className="profile__edit" onClick={(e) => onEditProfileActive(e)}>
+                Редактировать
+              </button>
+
+              <Link className="profile__exit" onClick={onSignOut}>
+                Выйти из аккаунта
+              </Link>
+            </>
+          )}
         </form>
       </div>
     </section>
