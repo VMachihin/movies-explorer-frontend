@@ -5,14 +5,15 @@ import './NotFound.css';
 
 function NotFound() {
   return (
-    <div className='notFound'>
-      <h2 className='notFound__title'>404</h2>
-      <span className='notFound__subtitle'>Страница не найдена</span>
+    <div className="notFound">
+      <h2 className="notFound__title">404</h2>
+      <span className="notFound__subtitle">Страница не найдена</span>
 
-
-      <Link to="/sign-in" className='notFound__link'>Назад</Link>
+      <Link to="/sign-in" className="notFound__link">
+        Назад
+      </Link>
     </div>
-  )
+  );
 }
 
 export default NotFound;
