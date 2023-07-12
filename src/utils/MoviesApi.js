@@ -1,6 +1,6 @@
 import { request } from './MainApi';
 
-import { MOVIES_URL, SAVED_MOVIES_URL } from './constants';
+import { BASE_URL, MOVIES_URL } from './constants';
 
 export const headers = {
   'Content-Type': 'application/json',
@@ -12,11 +12,11 @@ export function getAllMovies() {
 }
 
 export function getSavedMovies() {
-  return request(`${SAVED_MOVIES_URL}`, { headers: headers });
+  return request(`${BASE_URL}/movies`, { headers: headers });
 }
 
 export function saveMovie(movie) {
-  return request(`${SAVED_MOVIES_URL}`, {
+  return request(`${BASE_URL}/movies`, {
     headers: headers,
     method: 'POST',
     body: JSON.stringify({
@@ -36,7 +36,7 @@ export function saveMovie(movie) {
 }
 
 export function deleteMovie(id) {
-  return request(`${SAVED_MOVIES_URL}/${id}`, {
+  return request(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
     headers: headers,
   });

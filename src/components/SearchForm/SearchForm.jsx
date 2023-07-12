@@ -62,7 +62,7 @@ function SearchForm({ onFiltredMovies, searchRequest }) {
           />
           <button type="submit" className={`search__btn ${!searchText && `search__btn_disabled`}`} disabled={!searchText} />
 
-          <span className={`search__text-error ${!searchText && `search__text-error_active`}`}>Ведите слово</span>
+          <span className={`search__text-error ${!searchText && `search__text-error_active`}`}>Поле не должно быть пустым</span>
         </form>
 
         <FilterCheckbox isShortMovieChecked={searchRequest.isShortMovieChecked} filterShortMovies={toggleCheckBox} />

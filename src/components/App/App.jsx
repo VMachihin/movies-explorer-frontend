@@ -104,7 +104,6 @@ function App() {
   }
 
   function handleSaveMovies(movie, isSave, savedMovie) {
-    console.log(movie, isSave, savedMovie);
     if (isSave) {
       handleDeleteMovie(savedMovie._id);
     } else {
@@ -116,20 +115,18 @@ function App() {
     }
   }
 
-  function handleDeleteMovie(savedMovie) {
-    console.log(savedMovie);
-    // const foundSaveMovies = JSON.parse(localStorage.getItem('foundSaveMovies'));
-    // let newSavedMovies;
-    // deleteMovie(movieId)
-    //   .then((res) => {
-    //     newSavedMovies = savedMovies.filter((movie) => movie._id !== movieId);
-    //     setSavedMovies(newSavedMovies);
-    //   })
-    //   .catch(console.error);
-    // .finally(() => {
-    //   localStorage.setItem('searchedSavedMovies', JSON.stringify(newSavedMovies));
-    // });
+  function handleDeleteMovie(id) {
+    let newSavedMovies;
+    deleteMovie(id)
+      .then((res) => {
+        newSavedMovies = savedMovies.filter((movie) => movie._id !== id);
+        setSavedMovies(newSavedMovies);
+        localStorage.setItem('foundSaveMovies', JSON.stringify(newSavedMovies));
+      })
+      .catch(console.error);
   }
+
+  console.log(localStorage);
 
   function handleSignOut() {
     setloggedIn(false);

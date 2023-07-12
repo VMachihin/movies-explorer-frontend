@@ -15,9 +15,10 @@ function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
   function saveMovie() {
     onSaveMovie(movie, isSave, savedMovie);
   }
-  console.log(movie, savedMovie);
+
+  // console.log(savedMovies);
   function deleteMovie() {
-    onDeleteMovie(savedMovie);
+    onDeleteMovie(movie._id);
   }
   return (
     <li className="movie-library__item">

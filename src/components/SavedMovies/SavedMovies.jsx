@@ -29,10 +29,7 @@ function SavedMovies({ savedMovies, onDeleteMovie }) {
 
     if (stateSearchAndCkeckbox.isShortMovieChecked) {
       arrFiltredSaveMovies = savedMovies.filter((item) => {
-        return (
-          (item.duration <= SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase())) ||
-          (SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase()))
-        );
+        return item.duration <= SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase());
       });
 
       setFiltredSaveMovies(arrFiltredSaveMovies);
@@ -40,10 +37,7 @@ function SavedMovies({ savedMovies, onDeleteMovie }) {
       localStorage.setItem('foundSaveMovies', JSON.stringify(arrFiltredSaveMovies));
     } else if (!stateSearchAndCkeckbox.isShortMovieChecked) {
       arrFiltredSaveMovies = savedMovies.filter((item) => {
-        return (
-          item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase()) ||
-          item.nameEN.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase())
-        );
+        return item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase());
       });
 
       setFiltredSaveMovies(arrFiltredSaveMovies);
