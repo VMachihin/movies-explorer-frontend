@@ -25,37 +25,34 @@ function Movies({ movies, savedMovies, onSaveMovie, onDeleteMovie }) {
   }, [reqMovies]);
 
   function handleFiltredMovies(stateSearchAndCkeckbox) {
-    if (!filtredMovies.length) {
-      setIsLoading(true);
-    }
+    console.log(stateSearchAndCkeckbox);
+    setIsLoading(true);
 
-    let arrFitredMovies = [];
+    setTimeout(() => {
+      let arrFitredMovies = [];
 
-    localStorage.setItem('reqMovies', JSON.stringify(stateSearchAndCkeckbox));
+      localStorage.setItem('reqMovies', JSON.stringify(stateSearchAndCkeckbox));
 
-    if (stateSearchAndCkeckbox.isShortMovieChecked) {
-      arrFitredMovies = movies.filter((item) => {
-        return (
-          (item.duration <= SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase())) ||
-          (SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase()))
-        );
-      });
+      if (stateSearchAndCkeckbox.isShortMovieChecked) {
+        arrFitredMovies = movies.filter((item) => {
+          return (
+            item.duration <= SHORT_MOVIE_DURATION && item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase())
+          );
+        });
 
-      setFiltredMovies(arrFitredMovies);
+        setFiltredMovies(arrFitredMovies);
 
-      localStorage.setItem('foundMovies', JSON.stringify(arrFitredMovies));
-    } else if (!stateSearchAndCkeckbox.isShortMovieChecked) {
-      arrFitredMovies = movies.filter((item) => {
-        return (
-          item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase()) ||
-          item.nameEN.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase())
-        );
-      });
+        localStorage.setItem('foundMovies', JSON.stringify(arrFitredMovies));
+      } else if (!stateSearchAndCkeckbox.isShortMovieChecked) {
+        arrFitredMovies = movies.filter((item) => {
+          return item.nameRU.toLowerCase().includes(stateSearchAndCkeckbox.searchText.toLowerCase());
+        });
 
-      setFiltredMovies(arrFitredMovies);
-      localStorage.setItem('foundMovies', JSON.stringify(arrFitredMovies));
-    }
-    setIsLoading(false);
+        setFiltredMovies(arrFitredMovies);
+        localStorage.setItem('foundMovies', JSON.stringify(arrFitredMovies));
+      }
+      setIsLoading(false);
+    }, 1500);
   }
 
   return (

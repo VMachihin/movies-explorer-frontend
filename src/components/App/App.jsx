@@ -126,8 +126,6 @@ function App() {
       .catch(console.error);
   }
 
-  console.log(localStorage);
-
   function handleSignOut() {
     setloggedIn(false);
     // localStorage.removeItem('jwt');
